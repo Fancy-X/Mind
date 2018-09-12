@@ -1,0 +1,8 @@
+<view class="container">
+	<swiper indicator-dots="true" >
+		<swiper-item wx:for="{{textArr}}" wx:key="{{index}}">
+			<text>{{item}}</text>
+			<button wx:if="{{index == textArr.length-1}}" bindtap="enter">心事</button>
+		</swiper-item>
+	</swiper>
+</view>

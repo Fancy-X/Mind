@@ -1,0 +1,29 @@
+page,
+.container,
+swiper,
+swiper-item {
+	height: 100%;
+}
+swiper-item {
+	box-sizing: border-box;
+	text-align: center;
+	padding-top: 50%;
+}
+swiper-item text {
+	font-family: "Microsoft YaHei";
+	letter-spacing: 2px;
+	font-size: 50rpx;
+}
+swiper-item button {
+	width: 300rpx;
+	height: 100rpx;
+	line-height: 100rpx;
+	position: absolute;
+	bottom: 25%;
+	left: 50%;
+	margin-left: -150rpx;
+	border-radius: 50rpx;
+	border: 2px solid rgba(38, 28, 26, 0.8);
+	background-color: rgba(38, 28, 26, .4);
+	color: #FEF7A7;
+}

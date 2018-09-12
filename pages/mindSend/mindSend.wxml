@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="layout">
+    <textarea class="mindContent" placeholder="这一刻的心事..." focus="true" value="{{msg}}" bindinput="setMsg"></textarea>
+    <input type="text" class="username" placeholder="输入用户名" value="{{username}}" bindinput="setUsername">></input>
+    <view class="sendBtn" ><button  type="primary" catchtap="send" disabled="{{!msg || !username}}">发表</button></view>
+  </view>
+</view>

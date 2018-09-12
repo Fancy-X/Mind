@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="layout">
+    <view class="username">{{msg.username}}</view>
+    <view class="content">{{msg.content}}</view>
+    <view class="comeOn">
+      <text>{{msg.comeOn}}</text>
+      <image src="{{comeOnIcon}}" mode="aspectFit" catchtap="changeIcon"></image>
+    </view>
+  </view>
+</view>

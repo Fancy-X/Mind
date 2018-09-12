@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/splash/splash",
+    "pages/mindSend/mindSend",
+    "pages/mindContent/mindContent",
+    "pages/mindTree/mindTree",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle":"black"
+  }
+}
