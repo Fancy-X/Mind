@@ -16,7 +16,7 @@ page {
 	right: 0;
 	background-color: #fff;
 	z-index: 999;
-	animation: mask 1500ms linear  1 forwards;
+	animation: mask 1200ms linear  1 forwards;
 }
 .main {
   height: 100%;
@@ -51,6 +51,7 @@ page {
   overflow: hidden;
   line-height: 30rpx;
   text-align: center;
+  word-break: break-all;
 }
 .main .basket {
   height: 200rpx;

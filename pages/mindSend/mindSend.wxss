@@ -19,23 +19,50 @@ page {
 	font-size: 30rpx;
 	letter-spacing: 3rpx;
 }
-.layout .username {
-	letter-spacing: 3rpx;
-	font-size: 30rpx;
+.name-time {
+	display: flex;
 	height: 100rpx;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 }
-.layout .sendBtn {
-	height: 100rpx;
+.name-time .username {
+	height: 100%;
+	flex: 1;
+	letter-spacing: 3rpx;
+	font-size: 30rpx;
+	padding: 0 10rpx;
 }
-.sendBtn button {
-	float: right;
+.name-time .time {
+	box-sizing: border-box;
+	height: 100%;
+	font-size: 26rpx;
+	width: 160rpx;
+	line-height: 40rpx;
+	text-align: right;
+	padding: 12rpx 0;
+}
+.layout .allBtn {
+	height: 100rpx;
+	display: flex;
+	padding-top: 26rpx;
+}
+.allBtn .location {
+	flex: 1;
+}
+.location image {
+	vertical-align: middle;
+	height: 50rpx;
+	width: 50rpx;
+	padding: 20rpx;
+}
+.location text {
+	font-size: 13px;
+}
+.allBtn .sendBtn {
 	height: 70rpx;
 	width: 100rpx;
-	margin-top: 26rpx;
 	font-size: 30rpx;
-	text-align: center;
 	line-height: 70rpx;
+	margin-top: 10rpx;
 	padding: 0;
 }

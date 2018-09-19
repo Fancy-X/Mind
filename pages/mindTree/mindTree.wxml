@@ -5,31 +5,31 @@
     <movable-view direction="all" catchtouchstart="startTap" catchchange="moveTap" catchtouchend="endTap"  x="{{heart[0].touchX}}" y="{{heart[0].touchY}}" id="0" class="heart-all">
       <image src="/images/heart.png" mode="aspectFit"></image>
       <view class="trunk" hidden="{{!heart[0].trunkShow}}"></view>
-      <text>{{url[0].name}}</text>
+      <text>{{msg[0].username}}</text>
     </movable-view>
     <movable-view direction="all" catchtouchstart="startTap" catchchange="moveTap" catchtouchend="endTap"  x="{{heart[1].touchX}}" y="{{heart[1].touchY}}" id="1" class="heart-all">
       <image src="/images/heart.png" mode="aspectFit"></image>
       <view class="trunk" hidden="{{!heart[1].trunkShow}}"></view>
-      <text>{{url[1].name}}</text>
+      <text>{{msg[1].username}}</text>
     </movable-view>
     <movable-view direction="all" catchtouchstart="startTap" catchchange="moveTap" catchtouchend="endTap"  x="{{heart[2].touchX}}" y="{{heart[2].touchY}}" id="2" class="heart-all">
       <image src="/images/heart.png" mode="aspectFit"></image>
       <view class="trunk" hidden="{{!heart[2].trunkShow}}"></view>
-      <text>{{url[2].name}}</text>
+      <text>{{msg[2].username}}</text>
     </movable-view>
     <movable-view direction="all" catchtouchstart="startTap" catchchange="moveTap" catchtouchend="endTap"  x="{{heart[3].touchX}}" y="{{heart[3].touchY}}" id="3" class="heart-all">
       <image src="/images/heart.png" mode="aspectFit"></image>
       <view class="trunk" hidden="{{!heart[3].trunkShow}}"></view>
-      <text>{{url[3].name}}</text>
+      <text>{{msg[3].username}}</text>
     </movable-view>
     <movable-view direction="all" catchtouchstart="startTap" catchchange="moveTap" catchtouchend="endTap"  x="{{heart[4].touchX}}" y="{{heart[4].touchY}}" id="4" class="heart-all">
       <image src="/images/heart.png" mode="aspectFit"></image>
       <view class="trunk" hidden="{{!heart[4].trunkShow}}"></view>
-      <text>{{url[4].name}}</text>
+      <text>{{msg[4].username}}</text>
     </movable-view>
     <image  class="basket {{animationData.basket}}" src="/images/basket.png" mode="aspectFit"></image>
-    <button catchtap="refresh" class="prev"><image src="/images/left.png" mode="aspectFit"></image></button>
-    <button catchtap="refresh" class="next"><image src="/images/right.png" mode="aspectFit"></image></button>
+    <button catchtap="prev" class="prev"><image src="/images/left.png" mode="aspectFit"></image></button>
+    <button catchtap="next" class="next"><image src="/images/right.png" mode="aspectFit"></image></button>
     <button catchtap="musicPause" class="music rotate {{animationData.music}}"><image src="/images/music.png" mode="aspectFit" ></image></button>
     <button catchtap="toSend" class="toSend"><image src="/images/send.png" mode="aspectFit"></image></button>
   </movable-area>

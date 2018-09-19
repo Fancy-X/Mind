@@ -1,11 +1,18 @@
 <!--index.wxml-->
 <view class="container">
   <view class="layout">
-    <view class="username">{{msg.username}}</view>
+    <view class="name-time">
+      <view class="username">{{msg.username}}：</view>
+      <text class="time">{{msg.time}}</text>
+    </view>
     <view class="content">{{msg.content}}</view>
-    <view class="comeOn">
-      <text>{{msg.comeOn}}</text>
-      <image src="{{comeOnIcon}}" mode="aspectFit" catchtap="changeIcon"></image>
+    <view class="footer">
+      <view class="location">
+        <image src="/images/location.png" mode="aspectFit"></image>
+        <text>{{msg.location}}</text>
+      </view>
+      <image class="comeOn" src="{{comeOnIcon?'/images/comeon2.png':'/images/comeon.png'}}" mode="aspectFit" catchtap="comeOn"></image>
+      <text class="count">{{msg.comeOn}}</text>
     </view>
   </view>
 </view>

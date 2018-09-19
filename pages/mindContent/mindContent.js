@@ -1,31 +1,81 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const api = require('../../utils/api')
 
 Page({
-  data: {
-	msg: {
-		id: 123,
-		username: '咸鱼一条',
-		content: '是这样的啦嘎嘎嘎大是大非啊噶奥奥奥所多发所多发所阿斯蒂芬撒旦法撒旦法是大是大非阿斯顿发水电费sad发',
-		comeOn: 123
+	data: {
+		msg: {},
+		comeOnIcon: false
 	},
-    comeOnIcon: '/images/comeon.png'
-  },
-  onLoad() {
+	onLoad(query) {
+		let $this = this
+		api.getOne(query.id).then(res => {
+			$this.setData({
+				msg: res.data
+			})
+		})
 
-  },
-  changeIcon() {
-  	if (this.data.comeOnIcon == '/images/comeon.png') {
-  		this.setData({
-		    comeOnIcon: '/images/comeon2.png',
-		    'msg.comeOn': this.data.msg.comeOn + 1
-	    })
-    }else {
-	    this.setData({
-		    comeOnIcon: '/images/comeon.png',
-		    'msg.comeOn': this.data.msg.comeOn - 1
-	    })
-    }
-  }
+		wx.getStorage({
+			key: 'come_on',
+			complete: function (res) {
+				$this.storage = res.data
+				if ($this.storage) {
+					if (query.id in $this.storage) {
+						$this.setData({
+							comeOnIcon: $this.storage[query.id]
+						})
+					} else {
+						$this.storage[query.id] = false
+						wx.setStorage({key: 'come_on', data: $this.storage})
+					}
+				} else {
+					$this.storage = {}
+					$this.storage[query.id] = false
+					wx.setStorage({key: 'come_on', data: $this.storage})
+				}
+			}
+		})
+	},
+	comeOn() {
+		let id = this.data.msg._id
+		let count = this.data.msg.comeOn
+
+		if (this.data.comeOnIcon) {
+			api.comeOn(id, count-1).then(res => {
+				if (!res.status) {
+					this.storage[id] = false
+					wx.setStorage({key: 'come_on', data: this.storage})
+
+					this.setData({
+						comeOnIcon: false,
+						'msg.comeOn': count - 1
+					})
+				}else{
+					wx.showToast({
+						title: '取消加油失败了',
+						icon: 'none'
+					})
+				}
+			})
+		} else {
+			api.comeOn(id, count+1).then(res => {
+				if (!res.status) {
+					this.storage[id] = true
+					wx.setStorage({key: 'come_on', data: this.storage})
+
+					this.setData({
+						comeOnIcon: true,
+						'msg.comeOn': count + 1
+					})
+				}else{
+					wx.showToast({
+						title: '加油失败了',
+						icon: 'none'
+					})
+				}
+
+			})
+		}
+	}
 })

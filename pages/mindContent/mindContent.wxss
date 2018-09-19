@@ -17,13 +17,24 @@ page {
 	flex-direction: column;
 	box-shadow: 0 8rpx rgba(0,0,0,.2);
 }
-.layout .username {
+.layout .name-time {
+	display: flex;
 	box-sizing: border-box;
 	height: 100rpx;
 	padding: 10rpx 20rpx;
-	font-family: "Microsoft Himalaya";
+}
+.name-time .username {
 	font-weight: 700;
-	line-height: 100rpx;
+	font-size: 40rpx;
+	height: 100%;
+	flex: 1;
+	line-height: 80rpx;
+}
+.name-time .time {
+	line-height: 80rpx;
+	font-size: 24rpx;
+	text-align: right;
+	width: 210rpx;
 }
 .layout .content {
 	flex: 1;
@@ -33,18 +44,27 @@ page {
 	line-height: 25px;
 	font-family: "Microsoft YaHei";
 }
-.layout .comeOn {
+.layout .footer {
+	display: flex;
 	height: 100rpx;
 	line-height: 100rpx;
 }
-.comeOn image {
-	float: right;
-	vertical-align: top;
+.footer .location {
+	flex: 1;
+}
+.footer .comeOn,
+.location image {
+	vertical-align: middle;
 	height: 50rpx;
 	width: 50rpx;
-	padding: 22rpx;
+	padding: 20rpx;
 }
-.comeOn text {
-	float: right;
-	margin-right: 30rpx;
+.footer .comeOn {
+	margin-top: 4rpx;
+}
+.location text {
+	font-size: 13px;
+}
+.footer .count {
+	padding-right: 20rpx;
 }

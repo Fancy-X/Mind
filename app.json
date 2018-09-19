@@ -1,9 +1,9 @@
 {
   "pages":[
-    "pages/splash/splash",
+    "pages/mindTree/mindTree",
     "pages/mindSend/mindSend",
     "pages/mindContent/mindContent",
-    "pages/mindTree/mindTree",
+    "pages/splash/splash",
     "pages/logs/logs"
   ],
   "window":{
