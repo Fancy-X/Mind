@@ -57,7 +57,7 @@ page {
   height: 200rpx;
   width: 200rpx;
   position: absolute;
-  bottom: 150rpx;
+  top: 850rpx;
   left: 50%;
   margin-left: -100rpx;
   z-index: 0;
@@ -73,22 +73,22 @@ page {
 	background: none;
 }
 .music {
-	top: 83%;
+	top: 980rpx;
 	left: 20rpx;
 	background-color: rgba(0,0,0,.7);
 	border-radius: 50%;
 	padding: 14rpx;
 }
 .toSend {
-	top: 83%;
+	top: 980rpx;
 	right: 20rpx;
 }
 .prev {
-	top: 43%;
+	top: 450rpx;
 	left: 30rpx;
 }
 .next {
-	top: 43%;
+	top: 450rpx;
 	right: 30rpx;
 }
 

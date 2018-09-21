@@ -50,17 +50,17 @@ Page({
 		wx.showLoading({
 			title: '正在加载'
 		})
-		// const innerAudioContext = wx.createInnerAudioContext()
-		// innerAudioContext.loop = true
-		// innerAudioContext.autoplay = true
-		// innerAudioContext.src = 'http://2z0290a686.imwork.net:8081/audio/mind.mp3'
-		// innerAudioContext.onPlay(() => {
-		//     console.log('开始播放')
-		//    this.setData({
-		//     'animationData.music': ''
-		//    })
-		// })
-		// this.audio = innerAudioContext
+		const innerAudioContext = wx.createInnerAudioContext()
+		innerAudioContext.loop = true
+		innerAudioContext.autoplay = true
+		innerAudioContext.src = `${api.url}/audio/mind.mp3`
+		innerAudioContext.onPlay(() => {
+		    console.log('开始播放')
+		   this.setData({
+		    'animationData.music': ''
+		   })
+		})
+		this.audio = innerAudioContext
 
 		api.getMsg().then(res => {
 			if (!res.status) {

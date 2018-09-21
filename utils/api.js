@@ -1,4 +1,4 @@
-const api = 'http://2z0290a686.imwork.net:8081'
+const api = 'https://fancy-x.imwork.net'
 
 function fetch(url, data, method, header) {
 	return new Promise((res, rej) => {
@@ -39,6 +39,7 @@ function send(time, username, content ,location) {
 }
 
 module.exports = {
+	url: api,
 	getMsg,
 	getOne,
 	comeOn,
