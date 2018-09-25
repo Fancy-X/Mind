@@ -30,7 +30,7 @@
     <image  class="basket {{animationData.basket}}" src="/images/basket.png" mode="aspectFit"></image>
     <button catchtap="prev" class="prev"><image src="/images/left.png" mode="aspectFit"></image></button>
     <button catchtap="next" class="next"><image src="/images/right.png" mode="aspectFit"></image></button>
-    <button catchtap="musicPause" class="music rotate {{animationData.music}}"><image src="/images/music.png" mode="aspectFit" ></image></button>
+    <button catchtap="musicPause" class="music {{animationData.musicBg}}" style="transform: {{animationData.musicStop}}"><image src="/images/music.png" mode="aspectFit" class="imgRotate {{animationData.musicRotate}}"></image></button>
     <button catchtap="toSend" class="toSend"><image src="/images/send.png" mode="aspectFit"></image></button>
   </movable-area>
 </view>

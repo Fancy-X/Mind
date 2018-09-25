@@ -41,9 +41,11 @@ Page({
 		page: 1,
 		animationData: {
 			basket: 'scaleSmall',
-			music: 'stop'
+			musicRotate: '',
+			musicStop: '',
+			musicBg: 'stop'
 		},
-		maskShow: true
+		maskShow: true,
 	},
 	onLoad() {
 		let $this = this
@@ -55,10 +57,11 @@ Page({
 		innerAudioContext.autoplay = true
 		innerAudioContext.src = `${api.url}/audio/mind.mp3`
 		innerAudioContext.onPlay(() => {
-		    console.log('开始播放')
-		   this.setData({
-		    'animationData.music': ''
-		   })
+			console.log('开始播放')
+			this.setData({
+				'animationData.musicRotate': 'rotate',
+				'animationData.musicBg': ''
+			})
 		})
 		this.audio = innerAudioContext
 
@@ -181,13 +184,26 @@ Page({
 		})
 	},
 	musicPause() {
-		if (!this.data.animationData.music) {
+		let $this = this
+		if (this.data.animationData.musicRotate) {
+			wx.createSelectorQuery().select('.music').fields({computedStyle: ['transform']}, function (res) {
+				wx.createSelectorQuery().select('.imgRotate').fields({computedStyle: ['transform']}, function (res1) {
+					var musicRotate = res.transform == 'none'?'':res.transform
+					$this.setData({
+						'animationData.musicRotate': '',
+						'animationData.musicStop': `${musicRotate} ${res1.transform}`,
+						'animationData.musicBg': 'stop'
+					})
+				}).exec()
+			}).exec()
 			this.audio.pause()
-			this.setData({
-				'animationData.music': 'stop'
-			})
+
 			console.log("暂停");
 		} else {
+			$this.setData({
+				'animationData.musicRotate': 'rotate',
+				'animationData.musicBg': ''
+			})
 			this.audio.play()
 			console.log("继续");
 		}
