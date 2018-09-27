@@ -6,10 +6,14 @@ const api = require('../../utils/api')
 Page({
 	data: {
 		msg: {},
-		comeOnIcon: false
+		comeOnIcon: false,
+		playStatus: ''
 	},
 	onLoad(query) {
 		let $this = this
+		this.setData({
+			playStatus: query.playstatus
+		})
 		api.getOne(query.id).then(res => {
 			$this.setData({
 				msg: res.data
@@ -36,6 +40,11 @@ Page({
 				}
 			}
 		})
+	},
+	onShow() {
+		if (!app.audio.paused && this.data.playStatus) {  //监听后台切换事件
+			app.audio.play()
+		}
 	},
 	comeOn() {
 		let id = this.data.msg._id

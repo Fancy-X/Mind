@@ -40,7 +40,7 @@ Page({
 		msg: [],
 		page: 1,
 		animationData: {
-			basket: 'scaleSmall',
+			basket: '',
 			musicRotate: '',
 			musicStop: '',
 			musicBg: 'stop'
@@ -63,7 +63,7 @@ Page({
 				'animationData.musicBg': ''
 			})
 		})
-		this.audio = innerAudioContext
+		app.audio = innerAudioContext
 
 		api.getMsg().then(res => {
 			if (!res.status) {
@@ -89,6 +89,22 @@ Page({
 			lanT = res.top
 		}).exec()
 	},
+	onShow() {
+		if (app.globalData.refreshStatus) {
+			this.setData({
+				page: app.globalData.refreshPage
+			}, function () {
+				wx.startPullDownRefresh({
+					complete: function () {
+						app.globalData.refreshStatus = false
+					}
+				})
+			})
+		}
+		if (!app.audio.paused && this.data.animationData.musicRotate) {  //监听后台切换事件
+			app.audio.play()
+		}
+	},
 	startTap(e) {
 		var o = {'animationData.basket': 'scaleBig'}
 		o[`heart[${e.currentTarget.id}].trunkShow`] = false
@@ -99,17 +115,26 @@ Page({
 		curY = e.detail.y
 	},
 	endTap(e) {
-		if (curX > (app.screenWidth / 2 - 1.2 * lanW / 2) && curX < (app.screenWidth / 2 + 1.2 * lanW / 2)
-			&& curY > lanT - lanH * 0.1 && curY < lanT + lanH * 1.1) {
+		let screenWidth = app.globalData.screenWidth
+		if (curX > (screenWidth / 2 - 1.2 * lanW / 2) && curX < (screenWidth / 2 + 0.1 * lanW)
+			&& curY > lanT - lanH * 0.1 && curY < lanT + lanH * 0.6) {
 			let id
 			this.data.msg.forEach((item, index) => {
 				if (index == e.currentTarget.id) {
 					id = item._id
 				}
 			})
-			wx.navigateTo({
-				url: `../mindContent/mindContent?id=${id}`
-			})
+			if (id) {
+				wx.navigateTo({
+					url: `../mindContent/mindContent?id=${id}&playstatus=${this.data.animationData.musicRotate}`
+				})
+			} else {
+				wx.showToast({
+					title: '此心仍待有缘人！',
+					icon: 'none'
+				})
+			}
+
 		} else {
 			this.setData({
 				'animationData.basket': 'scaleSmall',
@@ -140,7 +165,14 @@ Page({
 					wx.hideLoading()
 					$this.setData({
 						msg: res.data,
-						page: res.page
+						page: res.page,
+						'animationData.basket': 'scaleSmall',
+						heart: $this.data.heart,
+						'heart[0].trunkShow': true,
+						'heart[1].trunkShow': true,
+						'heart[2].trunkShow': true,
+						'heart[3].trunkShow': true,
+						'heart[4].trunkShow': true
 					})
 				} else {
 					console.log(res.data + res.msg);
@@ -165,7 +197,14 @@ Page({
 				if (res.data.length) {
 					$this.setData({
 						msg: res.data,
-						page: res.page
+						page: res.page,
+						'animationData.basket': 'scaleSmall',
+						heart: $this.data.heart,
+						'heart[0].trunkShow': true,
+						'heart[1].trunkShow': true,
+						'heart[2].trunkShow': true,
+						'heart[3].trunkShow': true,
+						'heart[4].trunkShow': true
 					})
 				} else {
 					wx.showToast({
@@ -188,7 +227,7 @@ Page({
 		if (this.data.animationData.musicRotate) {
 			wx.createSelectorQuery().select('.music').fields({computedStyle: ['transform']}, function (res) {
 				wx.createSelectorQuery().select('.imgRotate').fields({computedStyle: ['transform']}, function (res1) {
-					var musicRotate = res.transform == 'none'?'':res.transform
+					var musicRotate = res.transform == 'none' ? '' : res.transform
 					$this.setData({
 						'animationData.musicRotate': '',
 						'animationData.musicStop': `${musicRotate} ${res1.transform}`,
@@ -196,37 +235,79 @@ Page({
 					})
 				}).exec()
 			}).exec()
-			this.audio.pause()
-
+			app.audio.pause()
 			console.log("暂停");
 		} else {
 			$this.setData({
 				'animationData.musicRotate': 'rotate',
 				'animationData.musicBg': ''
 			})
-			this.audio.play()
+			app.audio.play()
 			console.log("继续");
 		}
 
 	},
 	onPullDownRefresh() {
 		let $this = this
-		setTimeout(function () {
-			$this.setData({
-				'animationData.basket': 'scaleSmall',
-				heart: $this.data.heart,
-				'heart[0].trunkShow': true,
-				'heart[1].trunkShow': true,
-				'heart[2].trunkShow': true,
-				'heart[3].trunkShow': true,
-				'heart[4].trunkShow': true
-			})
-			wx.stopPullDownRefresh()
-		}, 1000)
+		wx.showLoading({
+			title: '正在加载'
+		})
+		api.getMsg(this.data.page).then(res => {
+			if (!res.status) {
+				wx.hideLoading()
+				setTimeout(function () {
+					if (res.data.length) {
+						$this.setData({
+							msg: res.data,
+							'animationData.basket': 'scaleSmall',
+							heart: $this.data.heart,
+							'heart[0].trunkShow': true,
+							'heart[1].trunkShow': true,
+							'heart[2].trunkShow': true,
+							'heart[3].trunkShow': true,
+							'heart[4].trunkShow': true
+						})
+					} else {
+						$this.setData({
+							'animationData.basket': 'scaleSmall',
+							heart: $this.data.heart,
+							'heart[0].trunkShow': true,
+							'heart[1].trunkShow': true,
+							'heart[2].trunkShow': true,
+							'heart[3].trunkShow': true,
+							'heart[4].trunkShow': true
+						})
+						wx.showToast({
+							title: '已是最后一页',
+							icon: 'none'
+						})
+					}
+					wx.stopPullDownRefresh()
+				}, 500)
+			} else {
+				console.log(res.data + res.msg);
+				$this.setData({
+					'animationData.basket': 'scaleSmall',
+					heart: $this.data.heart,
+					'heart[0].trunkShow': true,
+					'heart[1].trunkShow': true,
+					'heart[2].trunkShow': true,
+					'heart[3].trunkShow': true,
+					'heart[4].trunkShow': true
+				})
+				wx.hideLoading();
+				wx.showToast({
+					title: '加载失败',
+					icon: 'none'
+				})
+				wx.stopPullDownRefresh()
+			}
+		})
+
 	},
 	toSend() {
 		wx.navigateTo({
-			url: `../mindSend/mindSend`
+			url: `../mindSend/mindSend?playstatus=${this.data.animationData.musicRotate}`
 		})
 	}
 })

@@ -6,17 +6,24 @@ const api = require('../../utils/api')
 
 Page({
 	data: {
-		content: '',
-		username: '',
+		content: '看见这条内容且时间正确说明你已经发布成功',
+		username: '都是咸鱼',
 		nowTime: '获取时间失败',
 		location: '未获取定位',
-		locationIcon: false
+		locationIcon: false,
+		playStatus: ''
 	},
-	onLoad() {
+	onLoad(query) {
 		let time = getTime.formatTime(new Date())
 		this.setData({
+			playStatus: query.playstatus,
 			nowTime: time
 		})
+	},
+	onShow() {
+		if (!app.audio.paused && this.data.playStatus) {  //监听后台切换事件
+			app.audio.play()
+		}
 	},
 	setMsg(e) {
 		this.setData({
@@ -76,7 +83,6 @@ Page({
 
 	},
 	send() {
-		let $this = this
 		let time = this.data.nowTime
 		let username = this.data.username
 		let content = this.data.content
@@ -86,14 +92,17 @@ Page({
 		})
 		api.send(time, username, content, location).then(res => {
 			if (!res.status) {
+				app.globalData.refreshStatus = true
+				app.globalData.refreshPage = Math.ceil(res.count / 5)
+
 				wx.hideLoading()
 				wx.showModal({
-					title: '提交成功',
+					title: '提交成功，请返回查看。',
 					content: '',
 					showCancel: false,
 					success: function (res) {
 						if (res.confirm) {
-							wx.navigateTo({
+							wx.navigateBack({
 								url: '../mindTree/mindTree'
 							})
 						}

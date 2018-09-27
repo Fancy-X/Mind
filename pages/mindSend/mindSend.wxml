@@ -1,17 +1,17 @@
 <!--index.wxml-->
 <view class="container">
   <view class="layout">
-    <textarea class="mindContent" placeholder="这一刻的心事..." focus="true" value="{{content}}" bindinput="setMsg"></textarea>
-    <view class="name-time">
-      <input type="text" class="username" placeholder="输入用户名" value="{{username}}" bindinput="setUsername" maxlength="7">></input>
+    <!--<textarea class="mindContent" placeholder="这一刻的心事..." focus="true" value="{{content}}" bindinput="setMsg"></textarea>-->
+    <!--<view class="name-time">-->
+      <!--<input type="text" class="username" placeholder="输入用户名" value="{{username}}" bindinput="setUsername" maxlength="7">></input>-->
       <text class="time">{{nowTime}}</text>
-    </view>
+    <!--</view>-->
     <view class="allBtn" >
       <view class="location">
         <image src="{{locationIcon?'/images/location.png' : '/images/location2.png'}}" catchtap="getLocation"></image>
         <text>{{location}}</text>
       </view>
-      <button class="sendBtn" type="primary" catchtap="send" disabled="{{!content || !username}}">发表</button>
+      <button class="sendBtn" type="primary" catchtap="send" disabled="{{!content || !username}}">确定</button>
     </view>
   </view>
 </view>
